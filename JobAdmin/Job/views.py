@@ -648,6 +648,9 @@ def removeAuth(request):
             stu = Student.objects.get(sid=user.fkno)
             stu.delete()
             user.delete()
+        elif utype == '3':
+            user = User.objects.get(uid=id)
+            user.delete()
         else:
             user = User.objects.get(uid=id)
             t = Teacher.objects.get(tid=user.fkno)

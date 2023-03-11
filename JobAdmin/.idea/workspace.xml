@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7dc895c-81da-4206-8c9b-24d209491bfc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Job/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Job/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,8 +18,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Job/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="24" column="41" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+            <state relative-caret-position="36">
+              <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -32,55 +30,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Job/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1378">
-              <caret line="2268" column="35" selection-start-line="2268" selection-start-column="35" selection-end-line="2268" selection-end-column="35" />
+            <state relative-caret-position="273">
+              <caret line="651" column="43" selection-start-line="651" selection-start-column="43" selection-end-line="651" selection-end-column="43" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
-                <element signature="e#780#2151#0" />
-                <element signature="e#2179#5545#0" />
-                <element signature="e#5574#8114#0" />
-                <element signature="e#8143#11095#0" />
-                <element signature="e#11124#15011#0" />
-                <element signature="e#15039#17039#0" />
-                <element signature="e#17069#17417#0" />
-                <element signature="e#17445#18674#0" />
-                <element signature="e#18703#21930#0" />
-                <element signature="e#21962#22797#0" />
-                <element signature="e#22825#26205#0" />
-                <element signature="e#26237#34239#0" />
-                <element signature="e#34270#36107#0" />
-                <element signature="e#36138#37817#0" />
-                <element signature="e#37848#38685#0" />
-                <element signature="e#38717#39531#0" />
-                <element signature="e#39564#40303#0" />
-                <element signature="e#40335#40974#0" />
-                <element signature="e#41010#43300#0" />
-                <element signature="e#43330#44091#0" />
-                <element signature="e#44126#44657#0" />
-                <element signature="e#44692#45226#0" />
-                <element signature="e#45256#46095#0" />
-                <element signature="e#46126#47419#0" />
-                <element signature="e#47451#48030#0" />
-                <element signature="e#48063#48471#0" />
-                <element signature="e#48509#49980#0" />
-                <element signature="e#50020#50846#0" />
-                <element signature="e#50881#51749#0" />
-                <element signature="e#51780#52723#0" />
-                <element signature="e#52754#58262#0" />
-                <element signature="e#58294#59004#0" />
-                <element signature="e#59037#59443#0" />
-                <element signature="e#59479#60040#0" />
-                <element signature="e#60073#60873#0" />
-                <element signature="e#60911#61445#0" />
-                <element signature="e#61478#62114#0" />
-                <element signature="e#62146#63814#0" />
-                <element signature="e#63847#64446#0" />
-                <element signature="e#64480#64887#0" />
-                <element signature="e#64918#65555#0" />
-                <element signature="e#65587#67226#0" />
-                <element signature="e#67259#67906#0" />
-                <element signature="e#67940#68347#0" />
-                <element signature="e#68385#69781#0" />
                 <element signature="e#71115#71764#0" />
               </folding>
             </state>
@@ -163,6 +116,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -184,7 +138,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -310,16 +263,17 @@
       <workItem from="1678363107913" duration="7702000" />
       <workItem from="1678424678121" duration="17775000" />
       <workItem from="1678519495923" duration="4283000" />
+      <workItem from="1678532150536" duration="2329000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45550000" />
+    <option name="totallyTimeSpent" value="47879000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26340482" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26675603" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -333,7 +287,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.5467422" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.2917847" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -353,16 +307,6 @@
     <entry file="file://$PROJECT_DIR$/JobAdmin/__init__.py" />
     <entry file="file://$PROJECT_DIR$/Job/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Job/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="24" column="41" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Job/models.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -391,57 +335,22 @@
     <entry file="file://$PROJECT_DIR$/JobAdmin/urls.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/Job/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Job/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1378">
-          <caret line="2268" column="35" selection-start-line="2268" selection-start-column="35" selection-end-line="2268" selection-end-column="35" />
+        <state relative-caret-position="273">
+          <caret line="651" column="43" selection-start-line="651" selection-start-column="43" selection-end-line="651" selection-end-column="43" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
-            <element signature="e#780#2151#0" />
-            <element signature="e#2179#5545#0" />
-            <element signature="e#5574#8114#0" />
-            <element signature="e#8143#11095#0" />
-            <element signature="e#11124#15011#0" />
-            <element signature="e#15039#17039#0" />
-            <element signature="e#17069#17417#0" />
-            <element signature="e#17445#18674#0" />
-            <element signature="e#18703#21930#0" />
-            <element signature="e#21962#22797#0" />
-            <element signature="e#22825#26205#0" />
-            <element signature="e#26237#34239#0" />
-            <element signature="e#34270#36107#0" />
-            <element signature="e#36138#37817#0" />
-            <element signature="e#37848#38685#0" />
-            <element signature="e#38717#39531#0" />
-            <element signature="e#39564#40303#0" />
-            <element signature="e#40335#40974#0" />
-            <element signature="e#41010#43300#0" />
-            <element signature="e#43330#44091#0" />
-            <element signature="e#44126#44657#0" />
-            <element signature="e#44692#45226#0" />
-            <element signature="e#45256#46095#0" />
-            <element signature="e#46126#47419#0" />
-            <element signature="e#47451#48030#0" />
-            <element signature="e#48063#48471#0" />
-            <element signature="e#48509#49980#0" />
-            <element signature="e#50020#50846#0" />
-            <element signature="e#50881#51749#0" />
-            <element signature="e#51780#52723#0" />
-            <element signature="e#52754#58262#0" />
-            <element signature="e#58294#59004#0" />
-            <element signature="e#59037#59443#0" />
-            <element signature="e#59479#60040#0" />
-            <element signature="e#60073#60873#0" />
-            <element signature="e#60911#61445#0" />
-            <element signature="e#61478#62114#0" />
-            <element signature="e#62146#63814#0" />
-            <element signature="e#63847#64446#0" />
-            <element signature="e#64480#64887#0" />
-            <element signature="e#64918#65555#0" />
-            <element signature="e#65587#67226#0" />
-            <element signature="e#67259#67906#0" />
-            <element signature="e#67940#68347#0" />
-            <element signature="e#68385#69781#0" />
             <element signature="e#71115#71764#0" />
           </folding>
         </state>

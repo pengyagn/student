@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <div>
     <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
       <h3 class="title">系统登录</h3>
       <el-form-item prop="account">
@@ -15,13 +15,11 @@
           <el-radio label="2">教师</el-radio>
           <el-radio label="3">企业用户</el-radio>
         </el-radio-group>
-        <!--          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
         <el-button type="primary" size="small" style="float: right" @click="onSubmit" v-if="showBusiness">注册企业用户</el-button>
       </el-form-item>
       <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
       <el-form-item style="width: 100%">
         <el-button type="primary" style="width: 100%" @click.native.prevent="handleSubmit2" :loading="logining">登录</el-button>
-        <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
       </el-form-item>
     </el-form>
 
@@ -64,13 +62,12 @@
         <el-button type="primary" @click.native="addSubmit" :loading="addLoading">提交</el-button>
       </div>
     </el-dialog>
-  </section>
+  </div>
 </template>
 
 <script>
 import { requestLogin, addBusinessPerson } from '../api/api'
 import axios from 'axios'
-//import NProgress from 'nprogress'
 export default {
   data() {
     return {
@@ -83,14 +80,8 @@ export default {
         auth: ''
       },
       rules2: {
-        account: [
-          { required: true, message: '请输入账号', trigger: 'blur' }
-          //{ validator: validaePass }
-        ],
-        checkPass: [
-          { required: true, message: '请输入密码', trigger: 'blur' }
-          //{ validator: validaePass2 }
-        ]
+        account: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+        checkPass: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       },
       checked: true,
       addForm: {
@@ -107,47 +98,17 @@ export default {
       },
       addFormVisible: false,
       addFormRules: {
-        uname: [
-          { required: true, message: '请输入账号', trigger: 'blur' }
-          //{ validator: validaePass }
-        ],
-        upasswd: [
-          { required: true, message: '请输入密码', trigger: 'blur' }
-          //{ validator: validaePass }
-        ],
-        name: [
-          { required: true, message: '请输入员工姓名', trigger: 'blur' }
-          //{ validator: validaePass }
-        ],
-        bno: [
-          { required: true, message: '请输入员工号', trigger: 'blur' }
-          //{ validator: validaePass }
-        ],
-        phone: [
-          { required: true, message: '请输入联系方式', trigger: 'blur' }
-          //{ validator: validaePass }
-        ],
+        uname: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+        upasswd: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+        name: [{ required: true, message: '请输入员工姓名', trigger: 'blur' }],
+        bno: [{ required: true, message: '请输入员工号', trigger: 'blur' }],
+        phone: [{ required: true, message: '请输入联系方式', trigger: 'blur' }],
 
-        dept: [
-          { required: true, message: '请输入所属部门', trigger: 'blur' }
-          //{ validator: validaePass }
-        ],
-        businessName: [
-          { required: true, message: '请输入公司名称', trigger: 'blur' }
-          //{ validator: validaePass }
-        ],
-        businessPerson: [
-          { required: true, message: '请输入公司规模', trigger: 'blur' }
-          //{ validator: validaePass }
-        ],
-        businessType: [
-          { required: true, message: '请输入公司类型', trigger: 'blur' }
-          //{ validator: validaePass }
-        ],
-        location: [
-          { required: true, message: '请输入公司地址', trigger: 'blur' }
-          //{ validator: validaePass }
-        ]
+        dept: [{ required: true, message: '请输入所属部门', trigger: 'blur' }],
+        businessName: [{ required: true, message: '请输入公司名称', trigger: 'blur' }],
+        businessPerson: [{ required: true, message: '请输入公司规模', trigger: 'blur' }],
+        businessType: [{ required: true, message: '请输入公司类型', trigger: 'blur' }],
+        location: [{ required: true, message: '请输入公司地址', trigger: 'blur' }]
       },
       addLoading: false,
       val: ''
@@ -155,19 +116,15 @@ export default {
   },
   methods: {
     radioChange: function (val) {
-      // alert(val)
       this.val = val
       if (val == '3') {
         this.showBusiness = true
       } else {
         this.showBusiness = false
       }
-      // let that = this
-      // that.btnstatus=(val==='1')?true:false;
     },
     onSubmit() {
       //显示新增界面
-      // alert('add...')
       this.addFormVisible = true
       this.addForm = {
         name: '',
@@ -186,65 +143,44 @@ export default {
         if (valid) {
           this.$confirm('确认提交吗？', '提示', {}).then(() => {
             this.addLoading = true
-            //NProgress.start();
-            // let para = Object.assign({}, this.addForm);
-            let pars = {
-              businessName: this.addForm.businessName,
-              location: this.addForm.location,
-              businessType: this.addForm.businessType,
-              uname: this.addForm.uname,
-              upasswd: this.addForm.upasswd,
-              name: this.addForm.name,
-              bno: this.addForm.bno,
-              phone: this.addForm.phone,
-              dept: this.addForm.dept,
-              businessPerson: this.addForm.businessPerson
-            }
-            addBusinessPerson(pars).then((res) => {
-              this.addLoading = false
-              //NProgress.done();
-              this.$message({
-                message: '提交成功',
-                type: 'success'
-              })
-              this.$refs['addForm'].resetFields()
-              this.addFormVisible = false
-            })
+            this.registerBusinessPerson()
           })
         }
       })
     },
-    handleClick(tab, event) {
-      console.log(tab, event)
-    },
-    handleReset2() {
-      this.$refs.ruleForm2.resetFields()
+    async registerBusinessPerson() {
+      let pars = {
+        businessName: this.addForm.businessName,
+        location: this.addForm.location,
+        businessType: this.addForm.businessType,
+        uname: this.addForm.uname,
+        upasswd: this.addForm.upasswd,
+        name: this.addForm.name,
+        bno: this.addForm.bno,
+        phone: this.addForm.phone,
+        dept: this.addForm.dept,
+        businessPerson: this.addForm.businessPerson
+      }
+      const { data: res } = await addBusinessPerson(pars)
+      if (res.code == 200) {
+        this.addLoading = false
+        this.$message({ message: '提交成功', type: 'success' })
+        this.$refs.addForm.resetFields()
+        this.addFormVisible = false
+      }
     },
     handleSubmit2(ev) {
       var _this = this
       this.$refs.ruleForm2.validate((valid) => {
         if (valid) {
-          //_this.$router.replace('/table');
           this.logining = true
-          //NProgress.start();
           var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass }
-          // console.log(loginParams)
-
           requestLogin(loginParams).then((data) => {
             this.logining = false
-            //NProgress.done();
-            // console.log(data)
-            let { msg, code, user } = data.data
-            // console.log(msg)
-            // console.log(code)
+            let { code, user } = data.data
             console.log(user)
-            // if (cede == 500) {
-            //   console.log(111)
-            //   this.$message.error('错了哦，这是一条错误消息')
-            // }
             if (code !== 200) {
               this.$message({
-                // message: msg,
                 message: '用户不存在',
                 type: 'error'
               })
@@ -297,7 +233,6 @@ export default {
               this.$store.commit('setUtype', user.utype)
               var utype = user.utype
               localStorage.setItem('utype', user.utype)
-
               var len = this.$router.options.routes.length
               for (var i = 2; i < len - 1; i++) {
                 this.$router.options.routes[i].hidden = false
@@ -371,7 +306,6 @@ export default {
 
 <style lang="scss" scoped>
 .login-container {
-  /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/
   -webkit-border-radius: 5px;
   border-radius: 5px;
   -moz-border-radius: 5px;
