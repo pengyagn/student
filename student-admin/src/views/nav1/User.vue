@@ -500,11 +500,8 @@ export default {
     },
     addSubmit: function () {
       this.$refs.addForm.validate((valid) => {
-        // if (valid) {
         this.$confirm('确认提交吗？', '提示', {}).then(() => {
           this.addLoading = true
-          //NProgress.start();
-          // let para = Object.assign({}, this.addForm);
           let pars = {
             uname: this.addForm.uname,
             upassword: this.addForm.upassword,
@@ -521,14 +518,9 @@ export default {
             university: this.addForm.university,
             email: this.addForm.email,
             major: this.addForm.major
-            // utype0: this.addForm.utype0,
-            // utype1: this.addForm.utype1,
-            // utype2: this.addForm.utype2,
           }
-          // console.log(pars)
           addAuth(pars).then((res) => {
             this.addLoading = false
-            //NProgress.done();
             this.$message({
               message: '提交成功',
               type: 'success'
@@ -538,9 +530,6 @@ export default {
             this.getUser()
           })
         })
-        // } else {
-        // 	console.log('error submit!')
-        // }
       })
     },
     //显示编辑界面

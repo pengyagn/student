@@ -7,13 +7,6 @@ from django.core import serializers
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, InvalidPage
 import time
 # Create your views here.
-def hello(request):
-    # resp = {'errorcode': 100, 'detail': 'Get success'}
-    jobs = Job.objects.all()
-    jobs_json = serializers.serialize('json',jobs)
-    # print(type(jobs_json))
-    return HttpResponse(jobs_json, "application/json")
-    # return HttpResponse(json.dumps(resp), content_type="application/json")
 
 def login(request):
     # 只有请求header中的'Content-Type'：'application/x-www-form-urlencoded'才会填充request.POST
@@ -1941,15 +1934,10 @@ def allColleges(request):
     if request.method == 'GET':
         page = request.GET.get('page')
         pageSize = request.GET.get('pageSize')
-        # id = request.GET.get('id')
         collegeName = request.GET.get('collegeName')
         collegeAdmin = request.GET.get('collegeAdmin')
-        # print(collegeName)
-        # print(name)
+
         colleges = College.objects.all()
-
-        # print(collegeName)
-
         if len(collegeName) != 0:
             colleges = colleges.filter(collegeName__contains=collegeName)
 
@@ -2021,9 +2009,7 @@ def editCollege(request):
 def removeCollege(request):
     if request.method == 'GET':
         id = request.GET.get('id')
-
-        college = College.objects.get(id=id)
-        college.delete()
+        College.objects.filter(id=id).delete()
         data = {
             'msg': 'success',
             'code': 200,
@@ -2064,11 +2050,8 @@ def allSubjects(request):
     if request.method == 'GET':
         page = request.GET.get('page')
         pageSize = request.GET.get('pageSize')
-        # id = request.GET.get('id')
         subjectName = request.GET.get('SubjectName')
         subjectAdmin = request.GET.get('SubjectAdmin')
-        # print(SubjectName)
-        # print(name)
         subjects = Subject.objects.all()
 
 
@@ -2123,8 +2106,6 @@ def editSubject(request):
         id = request.GET.get('id')
         subjectName = request.GET.get('subjectName')
         subjectAdmin = request.GET.get('subjectAdmin')
-        # print(subjectName)
-        # print(id)
         subject = Subject.objects.get(id=id)
         subject.subjectName = subjectName
         subject.subjectAdmin = subjectAdmin
