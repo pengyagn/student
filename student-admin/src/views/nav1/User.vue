@@ -87,15 +87,18 @@
         <el-table-column label="操作" width="150" fixed="right">
           <template scope="scope">
             <!--					<el-button size="small" @click="handleEdit(scope.$index, scope.row)" v-show="false">编辑</el-button>-->
-            <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <el-button size="small" @click="handleEdit(scope.$index, scope.row)" type="primary">编辑</el-button>
             <el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
 
       <!--工具条-->
-      <el-col :span="24" class="toolbar">
-        <el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="pageSize" :total="total" style="float: right"> </el-pagination>
+      <el-col :span="24">
+        <!-- <el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="pageSize" :total="total" style="float: right"> </el-pagination> -->
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[5, 10, 15, 20]" layout="total, sizes, prev, pager, next, jumper" :total="8" style="text-align: center; margin-top: 15px"> </el-pagination>
+
+        <!-- <el-pagination background layout="prev, pager, next" :total="total" style="text-align: center; margin-top: 15px" :page-size="pageSize" @current-change="handleCurrentChange"> </el-pagination> -->
       </el-col>
 
       <!--编辑界面-->
@@ -341,7 +344,7 @@ export default {
         utype: ''
       },
       activeName: 'admin',
-      pageSize: 20,
+      pageSize: 10,
       total: 0,
       page: 1,
       loading: false,
@@ -444,6 +447,11 @@ export default {
     }
   },
   methods: {
+    handleSizeChange(size) {
+      this.pageSize = size
+      this.page = 1
+      this.getUser()
+    },
     handleCurrentChange(val) {
       this.page = val
       this.getUser()
@@ -466,6 +474,7 @@ export default {
       this.loading = true
       getUserList(para).then((res) => {
         console.log(res)
+        this.total = res.data.total
         this.users = res.data.users
         this.loading = false
       })
@@ -500,7 +509,7 @@ export default {
     },
     addSubmit: function () {
       this.$refs.addForm.validate((valid) => {
-        this.$confirm('确认提交吗？', '提示', {}).then(() => {
+        this.$confirm('确认提交吗？', '提示', {}).then(async () => {
           this.addLoading = true
           let pars = {
             uname: this.addForm.uname,
@@ -519,16 +528,15 @@ export default {
             email: this.addForm.email,
             major: this.addForm.major
           }
-          addAuth(pars).then((res) => {
-            this.addLoading = false
-            this.$message({
-              message: '提交成功',
-              type: 'success'
-            })
-            this.$refs['addForm'].resetFields()
-            this.addFormVisible = false
-            this.getUser()
+          const { data: res } = await addAuth(pars)
+          this.addLoading = false
+          this.$message({
+            message: '提交成功',
+            type: 'success'
           })
+          this.$refs['addForm'].resetFields()
+          this.addFormVisible = false
+          this.getUser()
         })
       })
     },
@@ -544,15 +552,12 @@ export default {
       })
         .then(() => {
           this.listLoading = true
-          //NProgress.start();
           let para = {
             id: row.uid,
             utype: row.utype
           }
-          // console.log(para)
           removeAuth(para).then((res) => {
             this.listLoading = false
-            //NProgress.done();
             this.$message({
               message: '删除成功',
               type: 'success'
@@ -568,7 +573,6 @@ export default {
         if (valid) {
           this.$confirm('确认提交吗？', '提示', {}).then(() => {
             this.editLoading = true
-            //NProgress.start();
             let para = {
               utype: this.editForm.utype,
               uid: this.editForm.uid,
@@ -594,10 +598,8 @@ export default {
               location: this.editForm.location,
               bid: this.editForm.bid
             }
-            // console.log(para)
             editAuth(para).then((res) => {
               this.editLoading = false
-              //NProgress.done();
               this.$message({
                 message: '提交成功',
                 type: 'success'
@@ -611,15 +613,13 @@ export default {
       })
     },
 
-    findAllMajorAndCollege() {
-      getAllMajorAndCollege().then((res) => {
-        console.log(res)
-        this.subjects = res.data.subjects
-        this.colleges = res.data.collegesList
-      })
+    async findAllMajorAndCollege() {
+      const { data: res } = await getAllMajorAndCollege()
+      this.subjects = res.subjects
+      this.colleges = res.collegesList
     }
   },
-  mounted() {
+  created() {
     // 查询专业 学院
     this.findAllMajorAndCollege()
     this.getUser()

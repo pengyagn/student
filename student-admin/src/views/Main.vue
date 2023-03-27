@@ -63,7 +63,6 @@
                   <el-input v-model="userInfo.email"></el-input>
                 </el-form-item>
                 <el-form-item label="专业" prop="major">
-                  <!--									<el-input v-model="userInfo.major"></el-input>-->
                   <el-select v-model="userInfo.major" auto-complete="off">
                     <el-option v-for="item in this.subjects" :value="item" :key="item.id">{{ item }}</el-option>
                   </el-select>
@@ -78,7 +77,6 @@
                 </el-form-item>
                 <el-form-item>
                   <el-button type="primary" @click="submitForm('userInfo')">修改信息</el-button>
-                  <!--									<el-button @click="resetForm('ruleForm')">重置</el-button>-->
                 </el-form-item>
               </el-form>
             </div>

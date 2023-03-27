@@ -1300,31 +1300,13 @@ def editStudentInfo(request):
 def removeStu(request):
     if request.method == 'GET':
         sid = request.GET.get('sid')
-        jid = request.GET.get('jid')
-        eid = request.GET.get('eid')
-
-        if jid != '':
-            job = JobInfo.objects.get(id=jid)
-            job.delete()
-
-        if eid != '':
-            edu = Education.objects.get(eid=eid)
-            edu.delete()
-
-
         stu = Student.objects.get(sid=sid)
         stu.delete()
-
-        stuJobEdu = StudentJobEducation.objects.get(sid=sid)
-        stuJobEdu.delete()
-
         data = {
             'msg': 'success',
             'code': 200,
         }
         return JsonResponse(data=data, safe=False)
-
-
     else:
         data = {
             'msg': 'error',
@@ -1779,12 +1761,7 @@ def allResumes(request):
                 'total': count,
                 'resumes': resumeList
             }
-
             return JsonResponse(data=data, safe=False)
-
-
-
-
     else:
         data = {
             'msg': 'error',

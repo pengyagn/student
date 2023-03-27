@@ -225,11 +225,8 @@ export default {
                   return
                 }
               }
-
               sessionStorage.setItem('user', JSON.stringify(user))
-              // var userJSON = JSON.parse(user)
               sessionStorage.setItem('utype', user.utype)
-              // alert(user.utype)
               this.$store.commit('setUtype', user.utype)
               var utype = user.utype
               localStorage.setItem('utype', user.utype)
@@ -237,7 +234,6 @@ export default {
               for (var i = 2; i < len - 1; i++) {
                 this.$router.options.routes[i].hidden = false
               }
-
               if (utype == '1') {
                 // 456 8
                 this.$router.options.routes[4].hidden = true
@@ -262,7 +258,7 @@ export default {
                 this.$router.options.routes[11].hidden = true
                 this.$router.options.routes[12].hidden = true
                 this.$router.options.routes[13].hidden = true
-                this.$router.options.routes[16].hidden = true
+                // this.$router.options.routes[16].hidden = true
               }
 
               if (utype == '2') {

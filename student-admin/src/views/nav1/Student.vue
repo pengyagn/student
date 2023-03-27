@@ -142,32 +142,30 @@
         </el-table-column>
         <el-table-column label="操作" min-width="150">
           <template scope="scope">
-            <!--					<el-button size="small" @click="handleEdit(scope.$index, scope.row)" v-show="false">编辑</el-button>-->
-            <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-            <el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除学生信息</el-button>
-            <el-button type="warning" size="small" @click="handleJobDel(scope.$index, scope.row)" v-if="scope.row.jid != ''">删除就业信息</el-button>
-            <el-button type="warning" size="small" @click="handleEduDel(scope.$index, scope.row)" v-if="scope.row.eid != ''">删除升学信息</el-button>
+            <el-button size="small" @click="handleEdit(scope.$index, scope.row)" type="primary">编辑</el-button>
+            <el-button type="danger" size="small" @click="handleDel(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
 
       <!--工具条-->
-      <el-col :span="24" class="toolbar">
-        <el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="pageSize" :total="total" style="float: right"> </el-pagination>
+      <el-col :span="24">
+        <!-- <el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="pageSize" :total="total" style="float: right"> </el-pagination> -->
+        <!-- <el-pagination background layout="prev, pager, next" :total="total" style="text-align: center; margin-top: 15px" :page-size="pageSize" @current-change="handleCurrentChange"> </el-pagination> -->
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[5, 10, 15, 20]" layout="total, sizes, prev, pager, next, jumper" :total="8" style="text-align: center; margin-top: 15px"> </el-pagination>
       </el-col>
     </template>
   </section>
 </template>
 <script>
 import { editStudentInfo, getSutdentList, removeStu, removeJobInfo, removeEduInfo, getAllMajorAndCollege } from '../../api/api'
-//import NProgress from 'nprogress'
 export default {
   data() {
     return {
       filters: {
         name: ''
       },
-      pageSize: 20,
+      pageSize: 10,
       total: 0,
       page: 1,
       loading: false,
@@ -218,6 +216,11 @@ export default {
     }
   },
   methods: {
+    handleSizeChange(size) {
+      this.pageSize = size
+      this.page = 1
+      this.getStudent()
+    },
     handleCurrentChange(val) {
       this.page = val
       this.getStudent()
@@ -227,7 +230,7 @@ export default {
       return row.utype == 0 ? '管理员' : row.utype == 1 ? '学生' : '教师'
     },
     //获取用户列表
-    getStudent: function () {
+    getStudent() {
       let para = {
         name: this.filters.name,
         fkno: this.fkno,
@@ -236,7 +239,6 @@ export default {
         pageSize: this.pageSize
       }
       this.loading = true
-      //NProgress.start();
       getSutdentList(para).then((res) => {
         console.log(res)
         if (res.data.code != 200) {
@@ -248,7 +250,6 @@ export default {
 
         this.students = res.data.students
         this.loading = false
-        //NProgress.done();
       })
     },
     //显示编辑界面
@@ -299,77 +300,39 @@ export default {
       })
     },
     //删除
-    handleDel: function (index, row) {
-      this.$confirm('确认删除该记录吗?', '提示', {
+    handleDel(row) {
+      this.$confirm('确认删除该记录吗？', '提示', {
         type: 'warning'
       })
-        .then(() => {
+        .then(async () => {
           this.listLoading = true
-          //NProgress.start();
-          let para = { sid: row.sid, jid: row.jid }
-          console.log(para)
-          removeStu(para).then((res) => {
-            this.listLoading = false
-            //NProgress.done();
-            this.$message({
-              message: '删除成功',
-              type: 'success'
-            })
-            this.getStudent()
+          let params = { sid: row.sid }
+          const { data: res } = await removeStu(params)
+          this.listLoading = false
+          if (res.code == 200) {
+            this.$message({ type: 'success', message: '删除成功' })
+          }
+          this.getStudent()
+        })
+        .catch(() => {
+          this.$message({
+            type: 'success',
+            message: '已取消删除'
           })
         })
-        .catch(() => {})
     },
-    handleJobDel: function (index, row) {
-      this.$confirm('确认删除该记录吗?', '提示', {
-        type: 'warning'
-      })
-        .then(() => {
-          this.listLoading = true
-          //NProgress.start();
-          let para = { sid: row.sid, jid: row.jid, eid: row.eid }
-          console.log(para)
-          removeJobInfo(para).then((res) => {
-            this.listLoading = false
-            //NProgress.done();
-            this.$message({
-              message: '删除成功',
-              type: 'success'
-            })
-            this.getStudent()
-          })
-        })
-        .catch(() => {})
-    },
-    handleEduDel: function (index, row) {
-      this.$confirm('确认删除该记录吗?', '提示', {
-        type: 'warning'
-      })
-        .then(() => {
-          this.listLoading = true
-          //NProgress.start();
-          let para = { sid: row.sid, eid: row.eid }
-          console.log(para)
-          removeEduInfo(para).then((res) => {
-            this.listLoading = false
-            //NProgress.done();
-            this.$message({
-              message: '删除成功',
-              type: 'success'
-            })
-            this.getStudent()
-          })
-        })
-        .catch(() => {})
-    },
-    findAllMajorAndCollege() {
-      getAllMajorAndCollege().then((res) => {
-        // console.log(res)
-        this.subjects = res.data.subjects
-        this.colleges = res.data.collegesList
-      })
+
+    async findAllMajorAndCollege() {
+      const { data: res } = await getAllMajorAndCollege()
+      this.subjects = res.subjects
+      this.colleges = res.collegesList
+      // getAllMajorAndCollege().then((res) => {
+      //   this.subjects = res.data.subjects
+      //   this.colleges = res.data.collegesList
+      // })
     }
   },
+  created() {},
   mounted() {
     var user = sessionStorage.getItem('user')
     var userJSON = JSON.parse(user)
